@@ -65,7 +65,37 @@ namespace Diamond_Fighters_BlackJack
         }
         public void InitialDeal()
         {
+            Console.WriteLine("Delar ut första kortet till spelaren:");
+            Card playerCard1 = deck.DrawCard();
+            Player.Hand.AddCard(playerCard1);
+            Console.WriteLine($"Du fick: {playerCard1.Rank} i {playerCard1.Suit}");
 
+            Console.WriteLine("Delar ut första kortet till dealern:");
+            Card dealerCard1 = deck.DrawCard();
+            Dealer.Hand.AddCard(dealerCard1);
+            Console.WriteLine($"Dealern fick: {dealerCard1.Rank} i {dealerCard1.Suit}");
+
+            Console.WriteLine("Delar ut spelarens andra kort:");
+            Card playerCard2 = deck.DrawCard();
+            Player.Hand.AddCard(playerCard2);
+            Console.WriteLine($"Du fick: {playerCard2.Rank} i {playerCard2.Suit}");
+
+            if (Player.Hand.IsBlackjack()) //kontrollerar om spelaren får blackjack direkt
+            {
+                Console.WriteLine("Du fick BLACKJACK!");
+                isGameOver = true;             
+            }
+
+            Console.WriteLine("Delar ut dealerns dolda kort:");
+            Card dealerCard2 = deck.DrawCard();
+            Dealer.Hand.AddCard(dealerCard2);
+            Console.WriteLine($"Dealern fick ett dolt kort");
+            
+            if (Dealer.Hand.IsBlackjack()) //kontrollerar om dealern får blackjack
+            {
+                Console.WriteLine("Dealern fick BLACKJACK!");
+                isGameOver = true;
+            }
         }
         public void PlayerTurn()
         {
