@@ -10,6 +10,7 @@ namespace Diamond_Fighters_BlackJack
         public Player Player { get; private set; } = new Player(); //Kan också vara en lista om det skulle behövas
         public Dealer Dealer { get; private set; } = new Dealer(); //byt namn om dealer klassen heter något annat sen
         private Deck deck  = new Deck();
+        private bool isGameOver = false;
 
     /*public BlackJackGame()
             {
@@ -33,6 +34,40 @@ namespace Diamond_Fighters_BlackJack
                 }
             }
             Player.Name = inputPlayerName;
+        }
+        public void GameRound()
+        {
+            PlayerBet();
+            InitialDeal();
+            while (isGameOver == false)
+            {
+            PlayerTurn();
+            }
+            while (isGameOver == false)
+            {
+                DealerTurn();
+            }
+            GameOutcome();
+        }
+        public void PlayerBet()
+        {
+
+        }
+        public void InitialDeal()
+        {
+
+        }
+        public void PlayerTurn()
+        {
+
+        }
+        public void DealerTurn()
+        {
+
+        }
+        public void GameOutcome()
+        {
+
         }
     }
 }
