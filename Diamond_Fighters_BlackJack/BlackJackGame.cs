@@ -1,0 +1,38 @@
+﻿
+using System.Xml.Linq;
+
+namespace Diamond_Fighters_BlackJack
+{
+    internal class BlackJackGame
+    {
+        //public int GameNo { get; private set; } //håller koll på spel id
+        //public static List<BlackJackGame> GameHistory { get; private set; } = []; //Denna kanske ska vara i high-score klassen?
+        public Player Player { get; private set; } = new Player(); //Kan också vara en lista om det skulle behövas
+        public Dealer Dealer { get; private set; } = new Dealer(); //byt namn om dealer klassen heter något annat sen
+        private Deck deck  = new Deck();
+
+    /*public BlackJackGame()
+            {
+            GameNo = BlackJackGame.GameHistory.Count + 1;
+            GameHistory.Add(this);
+
+            }*/
+        public void GameSetup()
+        {
+            Console.WriteLine("Nytt spel");
+
+            string inputPlayerName = "";
+            while(string.IsNullOrWhiteSpace(inputPlayerName))
+            {
+                Console.WriteLine("Under vilket namn vill du spela som?");
+                inputPlayerName = Console.ReadLine();
+
+                if (string.IsNullOrWhiteSpace(inputPlayerName))
+                {
+                    Console.WriteLine("Namnet får inte vara tomt, försök igen:");
+                }
+            }
+            Player.Name = inputPlayerName;
+        }
+    }
+}
