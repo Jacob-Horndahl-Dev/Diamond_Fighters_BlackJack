@@ -1,5 +1,4 @@
 ﻿using Diamond_Fighters_BlackJack;
-
 Console.WriteLine("D I A M O N D  F I G H T E R S  B L A C K J A C K");
 Console.WriteLine("");
 
@@ -17,7 +16,33 @@ while (run)
     switch (menuChoice)
     {
         case "1":
-            //kod här
+            BlackJackGame newGame = new BlackJackGame(); //Skapar ett ny spelrunda
+            newGame.GameSetup();
+
+            bool keepPlaying = true;
+            while(keepPlaying)
+            {                
+                newGame.GameRound();
+                newGame.Player.RoundsPlayed++;  //Vad heter denna i player?
+                if (newGame.Player.Balance <= 0)
+                {
+                    Console.WriteLine("\nDu har slut på pengar! Ditt saldo är 0 kr och spelet är slut...");
+                    Console.WriteLine("Bättre lycka nästa gång!");
+                    keepPlaying = false;
+                }
+                else
+                {                    
+                    Console.WriteLine($"\nNuvarande saldo: {newGame.Player.Balance} kr"); //När en runda är slut frågar vi om den vill spela en till runda.
+                    Console.WriteLine("Vill du spela en runda till? (J/N)");
+                    string input = Console.ReadLine().Trim().ToUpper();
+
+                    if (input != "J" && input != "JA" && input != "YES" && input != "Y")
+                    {
+                        keepPlaying = false;
+                        Console.WriteLine("\nÅtervänder till huvudmenyn...");
+                    }
+                }
+            }
             break;
 
         case "2":
@@ -25,7 +50,7 @@ while (run)
             break;
 
         case "3":
-            //kod här
+            Rules.BlackJackRules();
             break;
 
         case "4":
