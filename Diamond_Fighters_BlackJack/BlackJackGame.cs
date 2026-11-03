@@ -173,7 +173,50 @@ namespace Diamond_Fighters_BlackJack
 
         public void GameOutcome()
         {
+            Console.WriteLine("\n--- BLACKJACK SPELET ÄR ÖVER ---");
+            Console.WriteLine("");
 
+            int playerScore = Player.Hand.GetValue();
+            int dealerScore = Dealer.Hand.GetValue();
+
+            Console.WriteLine($"{Player.Name} poäng: {playerScore}");
+            Console.WriteLine($"Dealerns poäng: {dealerScore}");
+
+            // 1. Kolla om spelaren blev tjock (förlorar direkt)
+            if (Player.Hand.IsBust())
+            {
+                Console.WriteLine("Du förlorade eftersom du gick över 21.");
+            }
+            // 2. Kolla om dealern blev tjock (spelaren vinner)
+            else if (Dealer.Hand.IsBust())
+            {
+                Console.WriteLine("Grattis! Dealern blev tjock – du vinner!");
+                Player.Balance += Player.Bet * 2;
+            }
+            // 3. Kolla om spelaren har Blackjack (och dealern inte har det)
+            else if (Player.Hand.IsBlackjack() && !Dealer.Hand.IsBlackjack())
+            {
+                Console.WriteLine("BLACKJACK! Du vinner extra mycket!");
+                Player.Balance += (int)(Player.Bet * 2.5);
+            }
+            // 4. Jämför poäng om ingen har blivit tjock
+            else if (playerScore > dealerScore)
+            {
+                Console.WriteLine("Grattis, du vinner med högre poäng!");
+                Player.Balance += Player.Bet * 2;
+            }
+            else if (playerScore < dealerScore)
+            {
+                Console.WriteLine("Dealern vinner med högre poäng. Bättre lycka nästa gång!");                
+            }
+            else
+            {
+                Console.WriteLine("Oavgjort (Push)! Insatsen går tillbaka.");
+                Player.Balance += Player.Bet;
+            }
+            // Nollställer händerna inför nästa runda
+            Player.Hand.Clear();
+            Dealer.Hand.Clear();
         }
 
     }
