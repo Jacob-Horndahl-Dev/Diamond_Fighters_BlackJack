@@ -16,7 +16,10 @@ while (run)
     switch (menuChoice)
     {
         case "1":
-            //kod här
+            BlackJackGame newGame = new BlackJackGame(); //Skapar ett ny spelrunda
+            newGame.GameSetup();
+            newGame.GameRound();
+
             break;
 
         case "2":

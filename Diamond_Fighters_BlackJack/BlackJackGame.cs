@@ -37,15 +37,14 @@ namespace Diamond_Fighters_BlackJack
         public void GameRound()
         {
             PlayerBet();
+            if (isGameOver) return;
+
             InitialDeal();
-            while (isGameOver == false)
-            {
+            
             PlayerTurn();
-            }
-            while (isGameOver == false)
-            {
-                DealerTurn();
-            }
+            
+            DealerTurn();
+
             GameOutcome();
         }
 
@@ -82,6 +81,7 @@ namespace Diamond_Fighters_BlackJack
             Card playerCard2 = deck.DrawCard();
             Player.Hand.AddCard(playerCard2);
             Console.WriteLine($"Du fick: {playerCard2.Rank} i {playerCard2.Suit}");
+            Console.WriteLine($"Din nuvarande poäng: {Player.Hand.GetValue()}");
 
             if (Player.Hand.IsBlackjack()) //kontrollerar om spelaren får blackjack direkt
             {
@@ -103,12 +103,72 @@ namespace Diamond_Fighters_BlackJack
 
         public void PlayerTurn()
         {
+            if (isGameOver == true) return;
 
+            bool playerTurnFinished = false;
+            while (!playerTurnFinished)
+            {
+                Console.WriteLine($"\n--- DIN TUR {Player.Name.ToUpper()} ---");
+                Console.WriteLine($"Din nuvarande poäng: {Player.Hand.GetValue()}");
+                Console.WriteLine("Vill du ta ett till kort (HIT) eller stanna (STAND)?");
+                Console.WriteLine("Välj H eller S:");
+                string hitStandInput = Console.ReadLine().Trim().ToUpper();
+
+                if (hitStandInput == "H") //Om spelaren vill dra ett till kort
+                {
+                    Card drawnCard = deck.DrawCard();
+                    Player.Hand.AddCard(drawnCard);
+                    Console.WriteLine($"Du drog: {drawnCard.Rank} i {drawnCard.Suit}");
+                    Console.WriteLine($"Din nuvarande poäng: {Player.Hand.GetValue()}");
+
+                    if (Player.Hand.IsBlackjack()) //kontrollerar om spelaren får blackjack
+                    {
+                        Console.WriteLine("Du fick BLACKJACK!");
+                        isGameOver = true;
+                    }
+                    if (Player.Hand.IsBust()) //kontrollerar om spelaren blir tjock
+                    {
+                        Console.WriteLine("Dina kort är värda mer än 21 och du blev tjock!");
+                        isGameOver = true;
+                    }
+                }
+                else if (hitStandInput == "S") //Om spelaren väljer att stanna
+                {
+                    Console.WriteLine("Du stannar.");
+                    Console.WriteLine($"Din nuvarande poäng: {Player.Hand.GetValue()}");
+                    playerTurnFinished = true;
+                }
+                else
+                {
+                    Console.WriteLine("Ogiltigt val! Skriv 'H' för Hit eller 'S' för Stand.");
+                }
+
+            }
         }
 
         public void DealerTurn()
         {
+            if (isGameOver == true) return;
 
+            Console.WriteLine($"\n--- DEALERNS TUR ---");
+            Console.WriteLine($"Dealerns nuvarande poäng: {Dealer.Hand.GetValue()}");
+            
+            while (Dealer.Hand.GetValue() < 17) // Dealern måste dra kort så länge poängen är under 17
+            {
+                Card drawnCard = deck.DrawCard();
+                Dealer.Hand.AddCard(drawnCard);
+                Console.WriteLine($"Dealern drog: {drawnCard.Rank} i {drawnCard.Suit}");
+                Console.WriteLine($"Dealerns nya poäng: {Dealer.Hand.GetValue()}");
+            }
+            
+            if (Dealer.Hand.IsBust()) // Kolla om dealern blev tjock
+            {
+                Console.WriteLine("Dealern blev tjock (över 21)!");
+            }
+            else
+            {
+                Console.WriteLine($"Dealern stannar på {Dealer.Hand.GetValue()} poäng.");
+            }
         }
 
         public void GameOutcome()
