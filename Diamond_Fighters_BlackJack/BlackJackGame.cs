@@ -197,7 +197,7 @@ namespace Diamond_Fighters_BlackJack
             else if (Player.Hand.IsBlackjack() && !Dealer.Hand.IsBlackjack())
             {
                 Console.WriteLine("BLACKJACK! Du vinner extra mycket!");
-                Player.Balance += (int)(Player.Bet * 2.5);
+                Player.Balance += (int)(Player.Bet * 2.5); //(int) gör att vinsten rundas neråt utan att krascha!
             }
             // 4. Jämför poäng om ingen har blivit tjock
             else if (playerScore > dealerScore)
