@@ -23,6 +23,7 @@ while (run)
             while(keepPlaying)
             {                
                 newGame.GameRound();
+                newGame.Player.RoundsPlayed++;  //Vad heter denna i player?
                 if (newGame.Player.Balance <= 0)
                 {
                     Console.WriteLine("\nDu har slut på pengar! Ditt saldo är 0 kr och spelet är slut...");
