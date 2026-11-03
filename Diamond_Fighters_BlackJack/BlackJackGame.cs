@@ -1,6 +1,4 @@
 ﻿
-using System.Xml.Linq;
-
 namespace Diamond_Fighters_BlackJack
 {
     internal class BlackJackGame
@@ -51,7 +49,19 @@ namespace Diamond_Fighters_BlackJack
         }
         public void PlayerBet()
         {
+            int playerBetAmount = 0;
+            if (Player.Balance > 0)
+            {
+                Console.WriteLine($"Du har {Player.Balance} kr att spela med. Hur mycket vill du satsa?");
+                while (!int.TryParse(Console.ReadLine(), out playerBetAmount) || playerBetAmount < 1 || playerBetAmount > Player.Balance)
+                {
+                        Console.WriteLine($"Du måste ange en giltig summa att satsa, minst 1 kr och max {Player.Balance} kr!");
+                }
 
+                Player.Bet = playerBetAmount;
+                Player.Balance = Player.Balance - playerBetAmount;
+            }
+            else isGameOver = true;
         }
         public void InitialDeal()
         {
