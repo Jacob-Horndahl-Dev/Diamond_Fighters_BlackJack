@@ -18,8 +18,30 @@ while (run)
         case "1":
             BlackJackGame newGame = new BlackJackGame(); //Skapar ett ny spelrunda
             newGame.GameSetup();
-            newGame.GameRound();
 
+            bool keepPlaying = true;
+            while(keepPlaying)
+            {                
+                newGame.GameRound();
+                if (newGame.Player.Balance <= 0)
+                {
+                    Console.WriteLine("\nDu har slut på pengar! Ditt saldo är 0 kr och spelet är slut...");
+                    Console.WriteLine("Bättre lycka nästa gång!");
+                    keepPlaying = false;
+                }
+                else
+                {                    
+                    Console.WriteLine($"\nNuvarande saldo: {newGame.Player.Balance} kr"); //När en runda är slut frågar vi om den vill spela en till runda.
+                    Console.WriteLine("Vill du spela en runda till? (J/N)");
+                    string input = Console.ReadLine().Trim().ToUpper();
+
+                    if (input != "J" && input != "JA" && input != "YES" && input != "Y")
+                    {
+                        keepPlaying = false;
+                        Console.WriteLine("\nÅtervänder till huvudmenyn...");
+                    }
+                }
+            }
             break;
 
         case "2":

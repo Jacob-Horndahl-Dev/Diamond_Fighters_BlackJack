@@ -45,7 +45,7 @@ namespace Diamond_Fighters_BlackJack
             
             DealerTurn();
 
-            GameOutcome();
+            GameOutcome();            
         }
 
         public void PlayerBet()
@@ -217,6 +217,7 @@ namespace Diamond_Fighters_BlackJack
             // Nollställer händerna inför nästa runda
             Player.Hand.Clear();
             Dealer.Hand.Clear();
+            isGameOver = false; //sätter false så nästa runda kan börja
         }
 
     }
