@@ -33,6 +33,7 @@ namespace Diamond_Fighters_BlackJack
             }
             Player.Name = inputPlayerName;
         }
+
         public void GameRound()
         {
             PlayerBet();
@@ -47,6 +48,7 @@ namespace Diamond_Fighters_BlackJack
             }
             GameOutcome();
         }
+
         public void PlayerBet()
         {
             int playerBetAmount = 0;
@@ -63,6 +65,7 @@ namespace Diamond_Fighters_BlackJack
             }
             else isGameOver = true;
         }
+
         public void InitialDeal()
         {
             Console.WriteLine("Delar ut första kortet till spelaren:");
@@ -97,17 +100,21 @@ namespace Diamond_Fighters_BlackJack
                 isGameOver = true;
             }
         }
+
         public void PlayerTurn()
         {
 
         }
+
         public void DealerTurn()
         {
 
         }
+
         public void GameOutcome()
         {
 
         }
+
     }
 }
