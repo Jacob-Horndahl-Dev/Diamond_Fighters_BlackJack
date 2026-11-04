@@ -107,11 +107,17 @@ namespace Diamond_Fighters_BlackJack
         {
             if (isGameOver == true) return;
 
+            List<Card> dealerCards = Dealer.Hand.GetCards(); //för att kunna visa vad dealerns uppvända kort är
             bool playerTurnFinished = false;
             while (!playerTurnFinished)
             {
                 Console.WriteLine($"\n--- DIN TUR {Player.Name.ToUpper()} ---");
-                Console.WriteLine($"Din nuvarande poäng: {Player.Hand.GetValue()}");
+                Console.WriteLine("Dina kort:");                                        //Lägg in metoden för att visa vad spelaren har på handen här
+                Console.WriteLine($"Dina kort är värda: {Player.Hand.GetValue()}");
+                Console.WriteLine("");
+                Console.WriteLine($"Dealern har: {dealerCards[0].Rank} i {dealerCards[0].Suit} och ett dolt kort");
+                Console.WriteLine($"Dealerns första kort är värt: {dealerCards[0].Value}");
+                Console.WriteLine("");
                 Console.WriteLine("Vill du ta ett till kort (HIT) eller stanna (STAND)?");
                 Console.WriteLine("Välj H eller S:");
                 string hitStandInput = Console.ReadLine().Trim().ToUpper();
@@ -155,6 +161,7 @@ namespace Diamond_Fighters_BlackJack
             if (isGameOver == true) return;
 
             Console.WriteLine($"\n--- DEALERNS TUR ---");
+            Console.WriteLine("Dealerns första kort och dolda kort som vänds upp är:");       //Här kan vi skriva ut dealerns kort på hand
             Console.WriteLine($"Dealerns nuvarande poäng: {Dealer.Hand.GetValue()}");
             
             while (Dealer.Hand.GetValue() < 17) // Dealern måste dra kort så länge poängen är under 17
@@ -162,6 +169,7 @@ namespace Diamond_Fighters_BlackJack
                 Card drawnCard = deck.DrawCard();
                 Dealer.Hand.AddCard(drawnCard);
                 Console.WriteLine($"Dealern drog: {drawnCard.Rank} i {drawnCard.Suit}");
+                Console.WriteLine("Dealern har nu:");                   //Här kan vi skriva in vilka kort dealern har på hand
                 Console.WriteLine($"Dealerns nya poäng: {Dealer.Hand.GetValue()}");
             }
             
