@@ -38,14 +38,16 @@ namespace Diamond_Fighters_BlackJack
         {
             PlayerBet();
             if (isGameOver) return;
-
+            
             InitialDeal();
             
             PlayerTurn();
             
             DealerTurn();
 
-            GameOutcome();            
+            GameOutcome();
+
+            deck.PrepareNextRound();
         }
 
         public void PlayerBet()
