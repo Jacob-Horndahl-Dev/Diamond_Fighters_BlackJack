@@ -49,17 +49,20 @@ private void RefillDeck()
         }
     }
 
-    public Card DrawCard()
-    {
-       if (cards.Count < 15)
+  public Card DrawCard()
 {
-    RefillDeck();
+    Card card = cards[0];
+    cards.RemoveAt(0);
+    return card;
 }
 
-        Card card = cards[0];
-        cards.RemoveAt(0);
-        return card;
+public void PrepareNextRound()
+{
+    if (cards.Count < 15)
+    {
+        RefillDeck();
     }
+}
 
     public int CardsRemaining()
     {
