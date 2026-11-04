@@ -25,10 +25,11 @@ while (run)
             while(keepPlaying)
             {                
                 newGame.GameRound();
-                newGame.Player.RoundsPlayed++;  //Vad heter denna i player?
+                newGame.Player.RoundsPlayed++;
                 if (newGame.Player.Balance <= 0)
                 {
-                    Console.WriteLine("\nDu har slut på pengar! Ditt saldo är 0 kr och spelet är slut...");
+                    Console.WriteLine($"\nDu spelade {newGame.Player.RoundsPlayed} rundor och du har slut på pengar!");
+                    Console.WriteLine("Ditt saldo är 0 kr och spelet är slut...");
                     Console.WriteLine("Bättre lycka nästa gång!");
                     keepPlaying = false;
                 }
@@ -41,6 +42,7 @@ while (run)
                     if (input != "J" && input != "JA" && input != "YES" && input != "Y")
                     {
                         keepPlaying = false;
+                        Console.WriteLine($"Du slutade på {newGame.Player.Balance} kr på {newGame.Player.RoundsPlayed} rundor");
                         Console.WriteLine("\nÅtervänder till huvudmenyn...");
                     }
                 }
