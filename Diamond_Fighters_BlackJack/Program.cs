@@ -3,6 +3,8 @@ Console.WriteLine("D I A M O N D  F I G H T E R S  B L A C K J A C K");
 Console.WriteLine("");
 
 bool run = true;
+HighscoreList highscores = new HighscoreList();
+highscores.Load();
 while (run)
 {
     Console.WriteLine("== Meny ==");
@@ -43,10 +45,12 @@ while (run)
                     }
                 }
             }
+
+            highscores.Add(newGame.Player.Name, newGame.Player.Balance, newGame.Player.RoundsPlayed);
             break;
 
         case "2":
-            //kod här
+            highscores.Show();
             break;
 
         case "3":
