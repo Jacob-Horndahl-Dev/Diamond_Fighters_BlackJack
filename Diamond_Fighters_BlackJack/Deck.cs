@@ -8,7 +8,13 @@ public class Deck
     private Random random = new Random();
 
     public Deck()
-    {
+{
+    RefillDeck();
+}
+
+private void RefillDeck()
+{
+    cards.Clear();
         string[] suits = { "Hjärter", "Ruter", "Klöver", "Spader" };
         string[] ranks = { "Ess", "2", "3", "4", "5", "6",
                            "7", "8", "9", "10", "Knekt", "Dam", "Kung" };
@@ -43,15 +49,20 @@ public class Deck
         }
     }
 
-    public Card DrawCard()
-    {
-        if (cards.Count == 0)
-            throw new InvalidOperationException("Kortleken är tom.");
+  public Card DrawCard()
+{
+    Card card = cards[0];
+    cards.RemoveAt(0);
+    return card;
+}
 
-        Card card = cards[0];
-        cards.RemoveAt(0);
-        return card;
+public void PrepareNextRound()
+{
+    if (cards.Count < 15)
+    {
+        RefillDeck();
     }
+}
 
     public int CardsRemaining()
     {
