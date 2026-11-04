@@ -127,11 +127,13 @@ namespace Diamond_Fighters_BlackJack
                     {
                         Console.WriteLine("Du fick BLACKJACK!");
                         isGameOver = true;
+                        playerTurnFinished = true;
                     }
                     if (Player.Hand.IsBust()) //kontrollerar om spelaren blir tjock
                     {
                         Console.WriteLine("Dina kort är värda mer än 21 och du blev tjock!");
                         isGameOver = true;
+                        playerTurnFinished = true;
                     }
                 }
                 else if (hitStandInput == "S") //Om spelaren väljer att stanna
