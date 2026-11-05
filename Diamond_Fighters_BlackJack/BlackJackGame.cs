@@ -198,23 +198,27 @@ namespace Diamond_Fighters_BlackJack
             if (Player.Hand.IsBust())
             {
                 Console.WriteLine("Du förlorade eftersom du gick över 21.");
+                Console.WriteLine("Insatsen går förlorad :(");
             }
             // 2. Kolla om dealern blev tjock (spelaren vinner)
             else if (Dealer.Hand.IsBust())
             {
                 Console.WriteLine("Grattis! Dealern blev tjock – du vinner!");
+                Console.WriteLine($"Du vann insatsen x2 ({Player.Bet * 2} kr)! :D");
                 Player.Balance += Player.Bet * 2;
             }
             // 3. Kolla om spelaren har Blackjack (och dealern inte har det)
             else if (Player.Hand.IsBlackjack() && !Dealer.Hand.IsBlackjack())
             {
                 Console.WriteLine("BLACKJACK! Du vinner extra mycket!");
+                Console.WriteLine($"Du vann insatsen x2,5 ({(int)Player.Bet * 2,5} kr)! WOW!!");
                 Player.Balance += (int)(Player.Bet * 2.5); //(int) gör att vinsten rundas neråt utan att krascha!
             }
             // 4. Jämför poäng om ingen har blivit tjock
             else if (playerScore > dealerScore)
             {
                 Console.WriteLine("Grattis, du vinner med högre poäng!");
+                Console.WriteLine($"Du vann insatsen x2 ({Player.Bet * 2} kr)! :D");
                 Player.Balance += Player.Bet * 2;
             }
             else if (playerScore < dealerScore)
