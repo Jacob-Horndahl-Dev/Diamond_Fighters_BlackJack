@@ -55,7 +55,35 @@ public void ShowHand()
 {
     foreach (Card card in cards)
     {
+        string symbol = card.Suit switch
+        {
+            "Hjärter" => "♥",
+            "Ruter" => "♦",
+            "Klöver" => "♣",
+            "Spader" => "♠",
+            _ => "?"
+        };
+
+        string rank = card.Rank switch
+        {
+            "Ess" => "A",
+            "Knekt" => "J",
+            "Dam" => "Q",
+            "Kung" => "K",
+            _ => card.Rank
+        };
+
+        Console.WriteLine("┌─────────┐");
+        Console.WriteLine($"│ {rank,-2}      │");
+        Console.WriteLine("│         │");
+        Console.WriteLine($"│    {symbol}    │");
+        Console.WriteLine("│         │");
+        Console.WriteLine($"│      {rank,2} │");
+        Console.WriteLine("└─────────┘");
+
+        // Behåller den beskrivande texten
         Console.WriteLine($"{card.Suit} {card.Rank}");
+        Console.WriteLine();
     }
 }
 }
