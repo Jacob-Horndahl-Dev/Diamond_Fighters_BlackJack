@@ -112,7 +112,8 @@ namespace Diamond_Fighters_BlackJack
             while (!playerTurnFinished)
             {
                 Console.WriteLine($"\n--- DIN TUR {Player.Name.ToUpper()} ---");
-                Console.WriteLine("Dina kort:");                                        //Lägg in metoden för att visa vad spelaren har på handen här
+                Console.WriteLine("Dina kort:");
+                Player.Hand.ShowHand();                                        //Lägg in metoden för att visa vad spelaren har på handen här
                 Console.WriteLine($"Dina kort är värda: {Player.Hand.GetValue()}");
                 Console.WriteLine("");
                 Console.WriteLine($"Dealern har: {dealerCards[0].Rank} i {dealerCards[0].Suit} och ett dolt kort");
