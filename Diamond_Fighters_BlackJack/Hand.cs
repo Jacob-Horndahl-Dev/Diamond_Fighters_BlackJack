@@ -51,4 +51,11 @@ public class Hand
     {
         return new List<Card>(cards);
     }
+public void ShowHand()
+{
+    foreach (Card card in cards)
+    {
+        Console.WriteLine($"{card.Suit} {card.Rank}");
+    }
+}
 }
