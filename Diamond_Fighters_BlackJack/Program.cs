@@ -1,5 +1,7 @@
 ﻿using Diamond_Fighters_BlackJack;
+Console.OutputEncoding = System.Text.Encoding.UTF8;
 Console.WriteLine("D I A M O N D  F I G H T E R S  B L A C K J A C K");
+GameDesign.ShowBlackjackDesign();
 Console.WriteLine("");
 
 bool run = true;
@@ -61,6 +63,9 @@ while (run)
 
         case "4":
             Console.WriteLine("Avslutar programmet...");
+            Console.WriteLine("May the odds _ever_ be in your favor!");
+
+            GameDesign.ShowBlackjackDesign();
             run = false;
             break;
 

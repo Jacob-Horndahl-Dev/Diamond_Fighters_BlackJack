@@ -259,5 +259,5 @@ namespace Diamond_Fighters_BlackJack
         }
 
 
-} // Avslutar BlackJackGame-klassen
+    } // Avslutar BlackJackGame-klassen
 } // Avslutar namespace
