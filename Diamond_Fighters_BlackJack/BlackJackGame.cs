@@ -113,9 +113,12 @@ namespace Diamond_Fighters_BlackJack
             {
                 Console.WriteLine($"\n--- DIN TUR {Player.Name.ToUpper()} ---");
                 Console.WriteLine("Dina kort:");
-                Player.Hand.ShowHand();                                        //Lägg in metoden för att visa vad spelaren har på handen här
+                Player.Hand.ShowHand();  //Lägg in metoden för att visa vad spelaren har på handen här
                 Console.WriteLine($"Dina kort är värda: {Player.Hand.GetValue()}");
                 Console.WriteLine("");
+                Console.ForegroundColor = ConsoleColor.Red; 
+                Dealer.Hand.ShowFirstCard();
+                Console.ResetColor(); 
                 Console.WriteLine($"Dealern har: {dealerCards[0].Rank} i {dealerCards[0].Suit} och ett dolt kort");
                 Console.WriteLine($"Dealerns första kort är värt: {dealerCards[0].Value}");
                 Console.WriteLine("");
@@ -162,7 +165,10 @@ namespace Diamond_Fighters_BlackJack
             if (isGameOver == true) return;
 
             Console.WriteLine($"\n--- DEALERNS TUR ---");
-            Console.WriteLine("Dealerns första kort och dolda kort som vänds upp är:");       //Här kan vi skriva ut dealerns kort på hand
+            Console.WriteLine("Dealerns första kort och dolda kort som vänds upp är:"); //Här kan vi skriva ut dealerns kort på hand
+            Console.ForegroundColor = ConsoleColor.Red;
+            Dealer.Hand.ShowHand();
+            Console.ResetColor();
             Console.WriteLine($"Dealerns nuvarande poäng: {Dealer.Hand.GetValue()}");
             
             while (Dealer.Hand.GetValue() < 17) // Dealern måste dra kort så länge poängen är under 17
@@ -170,7 +176,10 @@ namespace Diamond_Fighters_BlackJack
                 Card drawnCard = deck.DrawCard();
                 Dealer.Hand.AddCard(drawnCard);
                 Console.WriteLine($"Dealern drog: {drawnCard.Rank} i {drawnCard.Suit}");
-                Console.WriteLine("Dealern har nu:");                   //Här kan vi skriva in vilka kort dealern har på hand
+                Console.WriteLine("Dealern har nu:");  //Här kan vi skriva in vilka kort dealern har på hand
+                Console.ForegroundColor = ConsoleColor.Red;
+                Dealer.Hand.ShowHand();
+                Console.ResetColor();
                 Console.WriteLine($"Dealerns nya poäng: {Dealer.Hand.GetValue()}");
             }
             
@@ -188,6 +197,12 @@ namespace Diamond_Fighters_BlackJack
         {
             Console.WriteLine("\n--- BLACKJACK SPELET ÄR ÖVER ---");
             Console.WriteLine("");
+            Console.WriteLine("Dina sista kort:"); // Visar spelarens och dealerns kort innan resultatet
+            Player.Hand.ShowHand();
+            Console.WriteLine("Dealerns sista kort:");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Dealer.Hand.ShowHand();
+            Console.ResetColor();
 
             int playerScore = Player.Hand.GetValue();
             int dealerScore = Dealer.Hand.GetValue();
@@ -199,17 +214,20 @@ namespace Diamond_Fighters_BlackJack
             if (Player.Hand.IsBust())
             {
                 Console.WriteLine("Du förlorade eftersom du gick över 21.");
+                GameDesign.ShowLoseDesign();
             }
             // 2. Kolla om dealern blev tjock (spelaren vinner)
             else if (Dealer.Hand.IsBust())
             {
                 Console.WriteLine("Grattis! Dealern blev tjock – du vinner!");
+                GameDesign.ShowWinDesign();
                 Player.Balance += Player.Bet * 2;
             }
             // 3. Kolla om spelaren har Blackjack (och dealern inte har det)
             else if (Player.Hand.IsBlackjack() && !Dealer.Hand.IsBlackjack())
             {
                 Console.WriteLine("BLACKJACK! Du vinner extra mycket!");
+                GameDesign.ShowBlackjackDesign();
                 Player.Balance += (int)(Player.Bet * 2.5); //(int) gör att vinsten rundas neråt utan att krascha!
             }
             // 4. Jämför poäng om ingen har blivit tjock
@@ -217,14 +235,17 @@ namespace Diamond_Fighters_BlackJack
             {
                 Console.WriteLine("Grattis, du vinner med högre poäng!");
                 Player.Balance += Player.Bet * 2;
+                GameDesign.ShowWinDesign();
             }
             else if (playerScore < dealerScore)
             {
-                Console.WriteLine("Dealern vinner med högre poäng. Bättre lycka nästa gång!");                
+                Console.WriteLine("Dealern vinner med högre poäng. Bättre lycka nästa gång!");
+                GameDesign.ShowLoseDesign();              
             }
             else
             {
                 Console.WriteLine("Oavgjort (Push)! Insatsen går tillbaka.");
+                GameDesign.ShowDrawDesign();
                 Player.Balance += Player.Bet;
             }
             // Nollställer händerna inför nästa runda
@@ -233,5 +254,6 @@ namespace Diamond_Fighters_BlackJack
             isGameOver = false; //sätter false så nästa runda kan börja
         }
 
-    }
-}
+
+} // Avslutar BlackJackGame-klassen
+} // Avslutar namespace

@@ -82,8 +82,17 @@ public void ShowHand()
         Console.WriteLine("└─────────┘");
 
         // Behåller den beskrivande texten
-        Console.WriteLine($"{card.Suit} {card.Rank}");
+               Console.WriteLine($"{card.Suit} {card.Rank}");
         Console.WriteLine();
     }
+}
+
+public void ShowFirstCard()
+{
+    if (cards.Count == 0) return;
+
+    Hand firstCardHand = new Hand();
+    firstCardHand.AddCard(cards[0]);
+    firstCardHand.ShowHand();
 }
 }
